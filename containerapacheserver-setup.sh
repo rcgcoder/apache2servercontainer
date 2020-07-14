@@ -11,6 +11,9 @@ if [ ! -d "$userPath" ]; then
 	/usr/bin/addUserWithPassword $ENV_USER $ENV_PASSWORD
 fi
 
+certbot --apache  --agree-tos -m ricardo.cantabrana@gmail.com -d cantabrana.no-ip.org -n
+
+
 #export vncpasswdPath="$userPath/.vnc"
 #if [ ! -d "$vncpasswdPath" ]; then
 #    echo "$vncpasswdPath not exists";

@@ -15,7 +15,6 @@ RUN ln -snf $(echo "/usr/share/zoneinfo/$TimeZone") /etc/localtime && echo "$Tim
 RUN apt-get update
 RUN apt-get install -y apache2 certbot software-properties-common python3-certbot-apache
 
-RUN certbot --apache  --agree-tos -m ricardo.cantabrana@gmail.com -d cantabrana.no-ip.org -n
 
 COPY runcontainer_apacheserver /usr/bin/runcontainer_apacheserver
 RUN chmod 777 -R /usr/bin/runcontainer_apacheserver
