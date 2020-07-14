@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN ln -snf $(echo "/usr/share/zoneinfo/$TimeZone") /etc/localtime && echo "$TimeZone" > /etc/timezone
 RUN apt-get update
-RUN apt-get install apache2
+RUN apt-get install -y apache2
 
 COPY runcontainer_apacheserver /usr/bin/runcontainer_apacheserver
 RUN chmod 777 -R /usr/bin/runcontainer_apacheserver
