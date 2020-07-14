@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export ENV_TZ=${TimeZone:-Europe/Madrid}
+
+ln -snf $(echo "/usr/share/zoneinfo/$ENV_TZ") /etc/localtime && echo "$ENV_TZ" > /etc/timezone
+echo timezone $ENV_TZ set to $(cat /etc/timezone)
+
+echo setting up the apache server
+/usr/bin/containerapacheserver-setup.sh
+
+echo starting apache server
+service apache2 start
+
+echo launching endless command
+echo $(ls /bin/w*)
+#/bin/sh
+#/bin/watch "ls /tmp"
+/usr/bin/bootstrap.sh
