@@ -7,6 +7,7 @@ ARG withUser=sae
 ARG withPassword=sae
 ARG withDomain=www.example.es
 ARG withMail=example@letsencrypt.com
+ARG withTestingCertificate=true
 
 ARG TimeZone=Europe/Madrid
 ENV DEBIAN_FRONTEND=noninteractive

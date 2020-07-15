@@ -6,6 +6,8 @@ export ENV_PASSWORD=${withPassword:-$ENV_USER}
 export userPath="/home/$ENV_USER"
 export ENV_MAIL=${withMail:-example@example.com}
 export ENV_DOMAIN=${withDomain:-the.example.com}
+export ENV_TESTING=${withTestingCertificate:-true}
+
 
 echo $userPath -- $username
 if [ ! -d "$userPath" ]; then
@@ -13,8 +15,16 @@ if [ ! -d "$userPath" ]; then
 	/usr/bin/addUserWithPassword $ENV_USER $ENV_PASSWORD
 fi
 
-echo mail $withMail - domain $withDomain
-certbot --apache --agree-tos -m $ENV_MAIL -d $ENV_DOMAIN -n
+
+echo mail $withMail - domain $withDomain - testing cert $ENV_TESTING
+
+export ENV_CERTBOTTESTINGPARAM="--test-cert"
+if [ "$ENV_TESTING" == "no" ]; then
+	export ENV_CERTBOTTESTINGPARAM=""
+fi
+	
+
+certbot --apache --agree-tos -m $ENV_MAIL -d $ENV_DOMAIN -n $ENV_CERTBOTTESTINGPARAM
 
 echo setting reverse proxy modules...
 ln -s /etc/apache2/mods-available/ssl.conf                 /etc/apache2/mods-enabled/ssl.conf
