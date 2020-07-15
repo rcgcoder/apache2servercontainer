@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  apache:
+    image: rcgcoder/apache2servercontainer:arm64
+    environment:
+        - withUser=oneUser
+        - withPassword=onePassword
+        - TimeZone=oneTimeZone
+        - withMail=onemail@mail.com
+        - withDomain=onedomain.com
+    ports:
+      - "8443:443"
+      - "8080:80"
+    deploy:
+      replicas: 1
