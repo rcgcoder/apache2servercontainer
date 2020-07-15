@@ -1,5 +1,5 @@
 #!/bin/bash
-#echo user passed $withUser - password $withPassword
+echo user passed $withUser - password $withPassword - mail $withMail - domain $withDomain
 
 export ENV_USER=${withUser:-sae}
 export ENV_PASSWORD=${withPassword:-$ENV_USER}
