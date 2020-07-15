@@ -13,7 +13,26 @@ if [ ! -d "$userPath" ]; then
 	/usr/bin/addUserWithPassword $ENV_USER $ENV_PASSWORD
 fi
 
+echo mail $withMail - domain $withDomain
 certbot --apache --agree-tos -m $ENV_MAIL -d $ENV_DOMAIN -n
+
+echo setting reverse proxy modules...
+ln -s /etc/apache2/mods-available/ssl.conf                 /etc/apache2/mods-enabled/ssl.conf
+ln -s /etc/apache2/mods-available/ssl.load                 /etc/apache2/mods-enabled/ssl.load
+ln -s /etc/apache2/mods-available/proxy_balancer.conf      /etc/apache2/mods-enabled/proxy_balancer.conf 
+ln -s /etc/apache2/mods-available/proxy_http2.load         /etc/apache2/mods-enabled/proxy_http2.load 
+ln -s /etc/apache2/mods-available/proxy_balancer.load      /etc/apache2/mods-enabled/proxy_balancer.load 
+ln -s /etc/apache2/mods-available/proxy_wstunnel.load      /etc/apache2/mods-enabled/proxy_wstunnel.load 
+ln -s /etc/apache2/mods-available/proxy_html.conf          /etc/apache2/mods-enabled/proxy_html.conf 
+ln -s /etc/apache2/mods-available/proxy.conf               /etc/apache2/mods-enabled/proxy.conf 
+ln -s /etc/apache2/mods-available/proxy_html.load          /etc/apache2/mods-enabled/proxy_html.load 
+ln -s /etc/apache2/mods-available/proxy.load               /etc/apache2/mods-enabled/proxy.load 
+ln -s /etc/apache2/mods-available/proxy_http.load          /etc/apache2/mods-enabled/proxy_http.load 
+ln -s /etc/apache2/mods-available/slotmem_plain.load       /etc/apache2/mods-enabled/slotmem_plain.load 
+ln -s /etc/apache2/mods-available/slotmem_shm.load         /etc/apache2/mods-enabled/slotmem_shm.load 
+ln -s /etc/apache2/mods-available/rewrite.load             /etc/apache2/mods-enabled/rewrite.load 
+ln -s /etc/apache2/mods-available/socache_shmcb.load       /etc/apache2/mods-enabled/socache_shmcb.load 
+ln -s /etc/apache2/mods-available/xml2enc.load             /etc/apache2/mods-enabled/xml2enc.load
 
 
 #export vncpasswdPath="$userPath/.vnc"
