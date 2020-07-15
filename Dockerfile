@@ -6,7 +6,7 @@ EXPOSE 22
 ARG withUser=sae
 ARG withPassword=sae
 ARG withDomain=www.example.es
-ARG withEmail=example@letsencrypt.com
+ARG withMail=example@letsencrypt.com
 
 ARG TimeZone=Europe/Madrid
 ENV DEBIAN_FRONTEND=noninteractive
