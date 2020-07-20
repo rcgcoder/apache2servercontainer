@@ -44,6 +44,7 @@ ln -s /etc/apache2/mods-available/rewrite.load             /etc/apache2/mods-ena
 ln -s /etc/apache2/mods-available/socache_shmcb.load       /etc/apache2/mods-enabled/socache_shmcb.load 
 ln -s /etc/apache2/mods-available/xml2enc.load             /etc/apache2/mods-enabled/xml2enc.load
 
+echo "IncludeOptional /usr/configs/apache2/*.conf" >> /etc/letsencrypt/options-ssl-apache.conf
 
 #export vncpasswdPath="$userPath/.vnc"
 #if [ ! -d "$vncpasswdPath" ]; then

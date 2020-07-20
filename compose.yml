@@ -1,5 +1,11 @@
 version: '3'
 
+
+configs:
+   internalConfig:
+     external: true
+     name: apacheHttpsRedirections
+
 services:
   apache:
     image: rcgcoder/apache2servercontainer:arm64
@@ -9,6 +15,10 @@ services:
         - TimeZone=oneTimeZone
         - withMail=onemail@mail.com
         - withDomain=onedomain.com
+		- withTestingCertificate=yes
+    configs:
+      - source: internalConfig 
+        target: /usr/configs/apache2/httpsRedirections.conf
     ports:
       - "8443:443"
       - "8080:80"
