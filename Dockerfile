@@ -14,7 +14,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN ln -snf $(echo "/usr/share/zoneinfo/$TimeZone") /etc/localtime && echo "$TimeZone" > /etc/timezone
 RUN apt-get update
-RUN apt-get install -y apache2 certbot software-properties-common python3-certbot-apache
+RUN apt-get install -y mc wget apache2 certbot software-properties-common python3-certbot-apache
 
 COPY addUserWithPassword /usr/bin/addUserWithPassword
 RUN chmod 777 -R /usr/bin/addUserWithPassword

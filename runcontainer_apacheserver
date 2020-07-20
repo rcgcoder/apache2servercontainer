@@ -10,7 +10,8 @@ echo setting up the apache server
 
 echo starting apache server
 service apache2 start
-
+sleep 10
+service apache2 restart
 echo launching endless command
 echo $(ls /bin/w*)
 #/bin/sh

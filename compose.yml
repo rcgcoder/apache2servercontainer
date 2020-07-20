@@ -15,7 +15,7 @@ services:
         - TimeZone=oneTimeZone
         - withMail=onemail@mail.com
         - withDomain=onedomain.com
-		- withTestingCertificate=yes
+		- withTestingCertificate=true
     configs:
       - source: internalConfig 
         target: /usr/configs/apache2/httpsRedirections.conf
