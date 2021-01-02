@@ -1,7 +1,9 @@
 FROM ubuntu:latest
 MAINTAINER rcgcoder
 EXPOSE 22
-
+EXPOSE 80
+EXPOSE 443
+EXPOSE 5901
 
 ARG withUser=sae
 ARG withPassword=sae

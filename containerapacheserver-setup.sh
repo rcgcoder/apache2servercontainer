@@ -1,5 +1,8 @@
 #!/bin/bash
-#echo user passed $withUser - password $withPassword - mail $withMail - domain $withDomain
+
+echo running containerapacherserver-setup.sh....
+
+echo user passed $withUser - password $withPassword - mail $withMail - domain $withDomain - secret $withSecretCertificate
 
 export ENV_USER=${withUser:-sae}
 export ENV_PASSWORD=${withPassword:-$ENV_USER}
@@ -17,7 +20,7 @@ if [ ! -d "$userPath" ]; then
 fi
 
 
-echo mail $withMail - domain $withDomain - testing cert $ENV_TESTING - secret cert ENV_SECRET_CERT
+echo mail $withMail - domain $withDomain - testing cert $ENV_TESTING - secret cert $ENV_SECRET_CERT
 
 echo setting reverse proxy modules...
 ln -s /etc/apache2/mods-available/ssl.conf                 /etc/apache2/mods-enabled/ssl.conf
