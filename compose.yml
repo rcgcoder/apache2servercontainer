@@ -15,7 +15,8 @@ services:
         - TimeZone=oneTimeZone
         - withMail=onemail@mail.com
         - withDomain=onedomain.com
-		- withTestingCertificate=true
+		- withTestingCertificate=false
+		- withSecretCertificate=true
     configs:
       - source: internalConfig 
         target: /usr/configs/apache2/httpsRedirections.conf
@@ -24,3 +25,12 @@ services:
       - "8080:80"
     deploy:
       replicas: 1
+    secrets:
+      - sslKey
+      - sslPem
+
+secrets:
+   sslKey:
+     external: true
+   sslPem:
+     external: true

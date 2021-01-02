@@ -7,6 +7,7 @@ export userPath="/home/$ENV_USER"
 export ENV_MAIL=${withMail:-example@example.com}
 export ENV_DOMAIN=${withDomain:-the.example.com}
 export ENV_TESTING=${withTestingCertificate:-true}
+export ENV_SECRET_CERT=${withSecretCertificate:-false}
 
 
 echo $userPath -- $username
@@ -16,15 +17,7 @@ if [ ! -d "$userPath" ]; then
 fi
 
 
-echo mail $withMail - domain $withDomain - testing cert $ENV_TESTING
-
-export ENV_CERTBOTTESTINGPARAM="--test-cert"
-if [ "$ENV_TESTING" == "no" ]; then
-	export ENV_CERTBOTTESTINGPARAM=""
-fi
-	
-
-certbot --apache --agree-tos -m $ENV_MAIL -d $ENV_DOMAIN -n $ENV_CERTBOTTESTINGPARAM
+echo mail $withMail - domain $withDomain - testing cert $ENV_TESTING - secret cert ENV_SECRET_CERT
 
 echo setting reverse proxy modules...
 ln -s /etc/apache2/mods-available/ssl.conf                 /etc/apache2/mods-enabled/ssl.conf
@@ -44,7 +37,19 @@ ln -s /etc/apache2/mods-available/rewrite.load             /etc/apache2/mods-ena
 ln -s /etc/apache2/mods-available/socache_shmcb.load       /etc/apache2/mods-enabled/socache_shmcb.load 
 ln -s /etc/apache2/mods-available/xml2enc.load             /etc/apache2/mods-enabled/xml2enc.load
 
-echo "IncludeOptional /usr/configs/apache2/*.conf" >> /etc/letsencrypt/options-ssl-apache.conf
+if [ "$ENV_SECRET_CERT" == "false" ]; then
+	export ENV_CERTBOTTESTINGPARAM="--test-cert"
+	if [ "$ENV_TESTING" == "no" ]; then
+		export ENV_CERTBOTTESTINGPARAM=""
+	fi
+	certbot --apache --agree-tos -m $ENV_MAIL -d $ENV_DOMAIN -n $ENV_CERTBOTTESTINGPARAM
+	echo "IncludeOptional /usr/configs/apache2/*.conf" >> /etc/letsencrypt/options-ssl-apache.conf
+else 
+	
+fi
+
+
+
 
 #export vncpasswdPath="$userPath/.vnc"
 #if [ ! -d "$vncpasswdPath" ]; then
