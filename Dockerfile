@@ -8,6 +8,7 @@ ARG withPassword=sae
 ARG withDomain=www.example.es
 ARG withMail=example@letsencrypt.com
 ARG withTestingCertificate=true
+ARG withSecretCertificate=false
 
 ARG TimeZone=Europe/Madrid
 ENV DEBIAN_FRONTEND=noninteractive
@@ -24,5 +25,6 @@ COPY containerapacheserver-setup.sh /usr/bin/containerapacheserver-setup.sh
 RUN chmod 777 -R /usr/bin/containerapacheserver-setup.sh
 COPY bootstrap.sh /usr/bin/bootstrap.sh
 RUN chmod 777 -R /usr/bin/bootstrap.sh
+
 
 ENTRYPOINT ["/bin/bash", "-c", "/usr/bin/runcontainer_apacheserver"]
