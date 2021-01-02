@@ -17,6 +17,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN ln -snf $(echo "/usr/share/zoneinfo/$TimeZone") /etc/localtime && echo "$TimeZone" > /etc/timezone
 RUN apt-get update
+RUN apt-get install -y apt-utils
+RUN apt-get update
 RUN apt-get install -y mc wget apache2 certbot software-properties-common python3-certbot-apache
 
 COPY addUserWithPassword /usr/bin/addUserWithPassword
