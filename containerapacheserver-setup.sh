@@ -73,6 +73,10 @@ else
 	echo "Redirect permanent / https://$ENV_DOMAIN/" >> /etc/apache2/sites-available/redirectToHttps.conf
 	echo "</VirtualHost>" >> /etc/apache2/sites-available/redirectToHttps.conf
 
+	echo "" >> /etc/apache2/apache2.conf
+	echo "ServerName $ENV_DOMAIN" >> /etc/apache2/apache2.conf
+	echo "" >> /etc/apache2/apache2.conf
+
 	ln -s /etc/apache2/sites-available/redirectToHttps.conf /etc/apache2/sites-enabled/redirectToHttps.conf
 	ln -s /etc/apache2/sites-available/redirectToHttps.conf /etc/apache2/sites-enabled/redirectToHttps.conf
 	ln -s /etc/apache2/sites-available/secret-ssl.conf /etc/apache2/sites-enabled/secret-ssl.conf
