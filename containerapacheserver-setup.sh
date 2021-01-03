@@ -48,7 +48,7 @@ if [ "$ENV_SECRET_CERT" == "false" ]; then
 	certbot --apache --agree-tos -m $ENV_MAIL -d $ENV_DOMAIN -n $ENV_CERTBOTTESTINGPARAM
 	echo "IncludeOptional /usr/configs/apache2/*.conf" >> /etc/letsencrypt/options-ssl-apache.conf
 else 
-	
+	echo "Secret Instructions"
 fi
 
 
