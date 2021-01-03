@@ -53,6 +53,7 @@ else
 	ln -s /run/secrets/sslPem /etc/ssl/certs/sslPem.pem
 
 	cp /tmp/secret-ssl.conf /etc/apache2/sites-available/secret-ssl.conf
+	
 	echo "" >> /etc/apache2/sites-available/secret-ssl.conf
 	echo "</VirtualHost>" >> /etc/apache2/sites-available/secret-ssl.conf
 	echo "</IfModule>" >> /etc/apache2/sites-available/secret-ssl.conf
