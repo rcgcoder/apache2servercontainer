@@ -49,6 +49,12 @@ if [ "$ENV_SECRET_CERT" == "false" ]; then
 	echo "IncludeOptional /usr/configs/apache2/*.conf" >> /etc/letsencrypt/options-ssl-apache.conf
 else 
 	echo "Secret Instructions"
+	cp /tmp/secret-ssl.conf /etc/apache2/sites-available/secret-ssl.conf
+	echo "</VirtualHost>" >> /etc/apache2/sites-available/secret-ssl.conf
+	echo "</IfModule>" >> /etc/apache2/sites-available/secret-ssl.conf
+	ln -s /run/secrets/sslKey /etc/ssl/private/sslKey.key
+	ln -s /run/secrets/sslPem /etc/ssl/certs/sslPem.pem
+	ln -s /etc/apache2/sites-available/secret-ssl.conf /etc/apache2/sites-enabled/secret-ssl.conf
 fi
 
 

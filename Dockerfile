@@ -25,6 +25,8 @@ COPY addUserWithPassword /usr/bin/addUserWithPassword
 RUN chmod 777 -R /usr/bin/addUserWithPassword
 COPY runcontainer_apacheserver /usr/bin/runcontainer_apacheserver
 RUN chmod 777 -R /usr/bin/runcontainer_apacheserver
+COPY secret-ssl.conf /tmp/secret-ssl.conf
+RUN chmod 777 -R /tmp/secret-ssl.conf
 COPY containerapacheserver-setup.sh /usr/bin/containerapacheserver-setup.sh
 RUN chmod 777 -R /usr/bin/containerapacheserver-setup.sh
 COPY bootstrap.sh /usr/bin/bootstrap.sh
