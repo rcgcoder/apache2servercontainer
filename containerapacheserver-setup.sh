@@ -78,7 +78,7 @@ else
 	echo "" >> /etc/apache2/apache2.conf
 
 	ln -s /etc/apache2/sites-available/redirectToHttps.conf /etc/apache2/sites-enabled/redirectToHttps.conf
-	ln -s /etc/apache2/sites-available/redirectToHttps.conf /etc/apache2/sites-enabled/redirectToHttps.conf
+	ln -s /etc/apache2/sites-available/redirectWWWToHttps.conf /etc/apache2/sites-enabled/redirectWWWToHttps.conf
 	ln -s /etc/apache2/sites-available/secret-ssl.conf /etc/apache2/sites-enabled/secret-ssl.conf
 	#cat -n /etc/apache2/sites-enabled/secret-ssl.conf 
 	
