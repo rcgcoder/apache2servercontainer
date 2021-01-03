@@ -49,18 +49,28 @@ if [ "$ENV_SECRET_CERT" == "false" ]; then
 	echo "IncludeOptional /usr/configs/apache2/*.conf" >> /etc/letsencrypt/options-ssl-apache.conf
 else 
 	echo "Secret Instructions"
+	
+	
 	ln -s /run/secrets/sslKey /etc/ssl/private/sslKey.key
 	ln -s /run/secrets/sslPem /etc/ssl/certs/sslPem.pem
-
 	cp /tmp/secret-ssl.conf /etc/apache2/sites-available/secret-ssl.conf
 	
 	echo "" >> /etc/apache2/sites-available/secret-ssl.conf
-	echo "</VirtualHost>" >> /etc/apache2/sites-available/secret-ssl.conf
+	echo "		ServerName $ENV_DOMAIN" >> /etc/apache2/sites-available/secret-ssl.conf
+	echo "" >> /etc/apache2/sites-available/secret-ssl.conf
+	echo "	</VirtualHost>" >> /etc/apache2/sites-available/secret-ssl.conf
 	echo "</IfModule>" >> /etc/apache2/sites-available/secret-ssl.conf
 
+	echo "" > /etc/apache2/sites-available/redirectToHttps.conf
+	echo "<VirtualHost *:80>" > /etc/apache2/sites-available/redirectToHttps.conf
+	echo "ServerName $ENV_DOMAIN" >> /etc/apache2/sites-available/redirectToHttps.conf
+	echo "Redirect permanent / https://$ENV_DOMAIN/" >> /etc/apache2/sites-available/redirectToHttps.conf
+	echo "</VirtualHost>" >> /etc/apache2/sites-available/redirectToHttps.conf
 
+
+	ln -s /etc/apache2/sites-available/redirectToHttps.conf /etc/apache2/sites-enabled/redirectToHttps.conf
 	ln -s /etc/apache2/sites-available/secret-ssl.conf /etc/apache2/sites-enabled/secret-ssl.conf
-	cat -n /etc/apache2/sites-enabled/secret-ssl.conf 
+	#cat -n /etc/apache2/sites-enabled/secret-ssl.conf 
 	
 fi
 
