@@ -57,19 +57,16 @@ else
 	
 	echo "" >> /etc/apache2/sites-available/secret-ssl.conf
 	echo "		ServerName $ENV_DOMAIN" >> /etc/apache2/sites-available/secret-ssl.conf
+	echo "		ServerAlias www.$ENV_DOMAIN" >> /etc/apache2/sites-available/secret-ssl.conf
 	echo "" >> /etc/apache2/sites-available/secret-ssl.conf
 	echo "	</VirtualHost>" >> /etc/apache2/sites-available/secret-ssl.conf
 	echo "</IfModule>" >> /etc/apache2/sites-available/secret-ssl.conf
 
-	echo "" > /etc/apache2/sites-available/redirectWWWToHttps.conf
-	echo "<VirtualHost *:80>" > /etc/apache2/sites-available/redirectWWWToHttps.conf
-	echo "ServerName www.$ENV_DOMAIN" >> /etc/apache2/sites-available/redirectWWWToHttps.conf
-	echo "Redirect permanent / https://www.$ENV_DOMAIN/" >> /etc/apache2/sites-available/redirectWWWToHttps.conf
-	echo "</VirtualHost>" >> /etc/apache2/sites-available/redirectWWWToHttps.conf
 
 	echo "" > /etc/apache2/sites-available/redirectToHttps.conf
 	echo "<VirtualHost *:80>" > /etc/apache2/sites-available/redirectToHttps.conf
 	echo "ServerName $ENV_DOMAIN" >> /etc/apache2/sites-available/redirectToHttps.conf
+	echo "ServerAlias www.$ENV_DOMAIN" >> /etc/apache2/sites-available/redirectToHttps.conf
 	echo "Redirect permanent / https://$ENV_DOMAIN/" >> /etc/apache2/sites-available/redirectToHttps.conf
 	echo "</VirtualHost>" >> /etc/apache2/sites-available/redirectToHttps.conf
 
