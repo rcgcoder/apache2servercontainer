@@ -9,5 +9,4 @@ do
 done
 
 echo "apache2 is dead... kill container"
-sleep 1000m;
 
