@@ -7,6 +7,7 @@ do
     sleep 1m;
 	counter=$(ps -ef | grep apache2 | wc -l)
 done
-echo "apache2 is dead... kill container"
 
+echo "apache2 is dead... kill container"
+sleep 1000m;
 
